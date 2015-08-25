@@ -1,19 +1,15 @@
-<ion-view can-swipe-back="true" hide-nav-bar="true">
-	<div class="bar bar-header bar-positive">
-	  <h1 class="title">bar-positive</h1>
-	</div>
-	<div style="clear:both"></div>
+<ion-view can-swipe-back="true" hide-nav-bar="false" view-title="Dashboard" >
+	<ion-content class="has-header">
+		<ion-scroll zooming="false" direction="y" style="height:100%">
 
-	<ion-scroll zooming="false" direction="y" style="height:100%">
-	  	
-	
-	  	
-		  	<div class="top-border"></div>
+		  	<div class="profile-bar">
+		  		<i class="icon ion-person"></i> Jeroen
+		  	</div>
 
-		  	<a href="#">
+		  	<a ui-sref="televisie">
 			   	<div class="tile">
 			   		<div class="tile-icon">
-			   			<img ng-src="img/icons/statistics38.png">
+			   			<i class="ion-ios-monitor"></i>
 			   		</div>
 			   		<div class="tile-title">
 			   			Televisie
@@ -24,7 +20,7 @@
 		   	<a href="#">
 			   	<div class="tile">
 			   		<div class="tile-icon">
-			   			<img ng-src="img/icons/money435.png">
+			   			<i class="ion-key"></i>
 			   		</div>
 			   		<div class="tile-title">
 			   			Deuren
@@ -35,7 +31,7 @@
 		   	<a href="#">
 			   	<div class="tile">
 			   		<div class="tile-icon">
-			   			<img ng-src="img/icons/money435.png"> 
+			   			<i class="ion-star"></i>
 			   		</div>
 			   		<div class="tile-title">
 			   			Favorieten
@@ -43,7 +39,6 @@
 			   	</div>
 		   	</a>
 
-	   	</div>
-	</ion-scroll>
-
+		</ion-scroll>
+	</ion-content>
 </ion-view>

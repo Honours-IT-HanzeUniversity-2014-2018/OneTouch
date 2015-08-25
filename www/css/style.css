@@ -2,9 +2,19 @@
 	padding-top:17.3vw;
 }
 
-.top-border { 
-	border-top:1px solid #e7dfe2;
+
+
+.profile-bar {
+	text-align: center;
+	height:13vw;
+	line-height: 13vw;
+	font-size: 7vw;
+	border-bottom:1px solid #e7dfe2;
 }
+.profile-bar i {
+	font-size:9vw;
+}
+
 .tile {
 	width:50%;
 	height:43vw;
@@ -16,26 +26,26 @@
 	text-decoration: none;
 	color:black;
 }
-
-.tile:nth-child(even) {
-	border-left:1px solid #e7dfe2;
-	box-sizing:border-box;
-}
-
 .tile-icon {
 	width:30vw;
 	height:20vw;
+	margin-top:6vw;
 	margin-left:auto;
 	margin-right:auto;
-	margin-top:30px;
 }
 
 .tile-icon img {
 	width:100%;
 	height:100%;
 }
+.tile-icon i {
+	font-size:24vw;
+	text-align: center;
+	display: inline-block;
+    width: 100%;
+}
 .tile-title {
 	text-align: center;
-	margin-top:10px;
-	font-size:10vw;
+	margin-top:4vw;
+	font-size:8vw;
 }
