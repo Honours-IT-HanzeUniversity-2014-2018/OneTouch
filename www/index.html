@@ -18,24 +18,19 @@
     <script src="js/controllers.js"></script>
   </head>
 
-  <body ng-app="starter">
-    <!--
-      The nav bar that will be updated as we navigate between views.
-    -->
+  <body ng-app="starter" ng-controller="ModuleCtrl">
+    <!-- The nav bar that will be updated as we navigate between views. -->
     <ion-nav-bar class="bar-positive">
       <ion-nav-back-button>
       </ion-nav-back-button>
 
       <ion-nav-buttons side="secondary" class="connection-status">
+          <!-- condition connected of disconnected -->
           <img ng-src="img/icon-connected.png" width="20vw" height="20vw" style="margin-top:2vw;">
       </ion-nav-buttons>
-
     </ion-nav-bar>
-    <!--
-      The views will be rendered in the <ion-nav-view> directive below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).
-    -->
+    
+    <!-- template folder rendered -->
     <ion-nav-view></ion-nav-view>
     
   </body>
