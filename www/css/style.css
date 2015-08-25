@@ -1,21 +1,41 @@
 .header-padding {
-	padding-top:64px;
+	padding-top:17.3vw;
 }
 
 .top-border { 
-	border-top:1px solid grey; 
+	border-top:1px solid #e7dfe2;
 }
 .tile {
 	width:50%;
-	height:200px;
+	height:43vw;
 	float:left;
 	background:#fff;
-	border-right:1px solid grey;
-	border-bottom:1px solid grey;
+	border-right:1px solid #e7dfe2;
+	border-bottom:1px solid #e7dfe2;
+	box-sizing:border-box;
+	text-decoration: none;
+	color:black;
+}
+
+.tile:nth-child(even) {
+	border-left:1px solid #e7dfe2;
 	box-sizing:border-box;
 }
 
-.tile:even {
-	border-left:1px solid grey;
-	box-sizing:border-box;
+.tile-icon {
+	width:30vw;
+	height:20vw;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:30px;
+}
+
+.tile-icon img {
+	width:100%;
+	height:100%;
+}
+.tile-title {
+	text-align: center;
+	margin-top:10px;
+	font-size:10vw;
 }

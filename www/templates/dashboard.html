@@ -1,15 +1,49 @@
-<ion-view view-title="Jeroen">
-  <div class="header-padding">
-  	<div class="top-border"></div>
-   	<div class="tile">
-   		tile 1
-   	</div>
-   	<div class="tile">
-   		tile 2
-   	</div>
-   	<div class="tile">
-   		tile 3
-   	</div>
+<ion-view can-swipe-back="true" hide-nav-bar="true">
+	<div class="bar bar-header bar-positive">
+	  <h1 class="title">bar-positive</h1>
+	</div>
+	<div style="clear:both"></div>
 
-  </ion-content>
+	<ion-scroll zooming="false" direction="y" style="height:100%">
+	  	
+	
+	  	
+		  	<div class="top-border"></div>
+
+		  	<a href="#">
+			   	<div class="tile">
+			   		<div class="tile-icon">
+			   			<img ng-src="img/icons/statistics38.png">
+			   		</div>
+			   		<div class="tile-title">
+			   			Televisie
+			   		</div>
+			   	</div>
+		   	</a>
+
+		   	<a href="#">
+			   	<div class="tile">
+			   		<div class="tile-icon">
+			   			<img ng-src="img/icons/money435.png">
+			   		</div>
+			   		<div class="tile-title">
+			   			Deuren
+			   		</div>
+			   	</div>
+		   	</a>
+
+		   	<a href="#">
+			   	<div class="tile">
+			   		<div class="tile-icon">
+			   			<img ng-src="img/icons/money435.png"> 
+			   		</div>
+			   		<div class="tile-title">
+			   			Favorieten
+			   		</div>
+			   	</div>
+		   	</a>
+
+	   	</div>
+	</ion-scroll>
+
 </ion-view>
