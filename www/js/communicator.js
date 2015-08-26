@@ -1,6 +1,6 @@
 function getData(url, object) {
     var xmlhttp = new XMLHttpRequest();
-    var baseUrl = "http://145.37.65.14:9080/api/v1/";
+    var baseUrl = "http://145.37.65.36/:9080/api/v1/";
 
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
