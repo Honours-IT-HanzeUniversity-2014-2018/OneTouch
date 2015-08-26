@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('OneTouch', ['ionic', 'OneTouch.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -23,20 +23,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
   $stateProvider
     .state('dashboard', {
       url: '/',
-      templateUrl: 'templates/dashboard.html'
+      controller: 'MenuController',
+      templateUrl: 'templates/menu.html'
     })
 
-    .state('module', {
-      url: '/module',
-      templateUrl: 'templates/module.html'
+    .state('menu', {
+      url: '/menu/:endpoint',
+      controller: 'MenuController',
+      templateUrl: 'templates/menu.html'
     });
 
   // if none of the above states are matched, use this as the fallback

@@ -1,16 +1,29 @@
-angular.module('starter.controllers', [])
+angular.module('OneTouch.controllers', ['ngResource'])
 
-.controller('ModuleCtrl', [ '$http', '$scope', function($http, $scope){
-	var module = $scope;
-	var baseUrl = "http://145.37.68.31:8090/api/v1/";
-	console.log($scope)
-	
-	$http.get(baseUrl + "user/profile.json").success(function(data){
-		module.profile = data;
-	});
+    .constant('OneTouchConfig', {
+          baseUrl: 'http://bb01.honours.robbytu.net:8090'
+    })
 
-	$http.get(baseUrl + "main/menu.json").success(function(data){
-		module.menu = data;
-	});
+    .factory('OneTouchAPI', ['OneTouchConfig', '$resource', function(OneTouchConfig, $resource) {
+        return {
+            get: function (endpoint) {
+                var resource = $resource(OneTouchConfig.baseUrl + endpoint);
+                return resource.get();
+            }
+        }
+    }])
 
-} ]);
+    .factory('Profile', ['OneTouchConfig', '$resource', function(OneTouchConfig, $resource) {
+        return $resource(OneTouchConfig.baseUrl + '/api/v1/user/profile.json', {'get': {method:'GET', isArray:false}});
+    }])
+
+    .controller('MenuController',
+    ['OneTouchAPI', 'Profile', '$scope', '$state', '$stateParams',
+    function (OneTouchAPI, Profile, $scope, $state, $stateParams) {
+        var endpoint = '/api/v1/main/menu.json';
+        if($stateParams.endpoint !== undefined)
+            endpoint = $stateParams.endpoint;
+
+        $scope.profile = Profile.get();
+        $scope.menu = OneTouchAPI.get(endpoint);
+    }]);
