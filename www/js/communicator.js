@@ -4,7 +4,7 @@ function getData(url, object) {
 
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            object.responseText = xmlhttp.responseText;
+            object = xmlhttp.responseText;
             object.response = true;
         }
     }
