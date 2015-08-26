@@ -3,23 +3,37 @@
 
 
     <ion-content class="has-header" style="height: 100%">
-        <ion-spinner class="loading" icon="spiral" ng-hide="menu.success"></ion-spinner>
-        <ion-scroll zooming="false" direction="y" style="height:100%">
+        <ion-spinner class="loading" icon="spiral" ng-hide="menu.success">
+        </ion-spinner>
             <div class="profile-bar" ng-hide="!menu.show_profile">
                 <i class="icon ion-person"></i>
                 {{profile.profile.fullname}}
             </div>
+        <ion-scroll zooming="false" direction="y" style="height:100%">
+            
 
-            <a ng-repeat="item in menu.data" ui-sref="menu({endpoint: item.action})">
-                <div class="tile">
-                    <div class="tile-icon">
-                        <i ng-class="'ion-' + item.icon"></i>
+            <span ng-repeat="item in menu.data">
+                <a ui-sref="menu({endpoint: item.action})" ng-if="item.is_menu">
+                    <div class="tile" ng-class="item.statuses">
+                        <div class="tile-icon">
+                            <i ng-class="'ion-' + item.icon"></i>
+                        </div>
+                        <div class="tile-title">
+                            {{item.title}}
+                        </div>
                     </div>
-                    <div class="tile-title">
-                        {{item.title}}
+                </a>
+                <a ng-if="!item.is_menu">
+                    <div class="tile">
+                        <div class="tile-icon">
+                            <i ng-class="'ion-' + item.icon"></i>
+                        </div>
+                        <div class="tile-title">
+                            {{item.title}}
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </span>
         </ion-scroll>
     </ion-content>
 </ion-view>

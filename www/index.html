@@ -22,13 +22,16 @@
   <body ng-app="OneTouch">
 
     <!-- The nav bar that will be updated as we navigate between views. -->
-    <ion-nav-bar class="bar-positive">
+    <ion-nav-bar class="bar-positive" ng-controller="StatusController">
       <ion-nav-back-button>
       </ion-nav-back-button>
 
       <ion-nav-buttons side="secondary" class="connection-status">
           <!-- condition connected of disconnected -->
-          <img ng-src="img/icon-connected.png" width="20vw" height="20vw" style="margin-top:2vw;">
+          <a ui-sref="dashboard">
+            <img ng-show="status.success" ng-src="img/icon-connected.png" width="20vw" height="20vw" style="margin-top:2vw;">
+            <img ng-hide="status.success" ng-src="img/icon-disconnected.png" width="20vw" height="20vw" style="margin-top:2vw;">
+          </a>
       </ion-nav-buttons>
     </ion-nav-bar>
     

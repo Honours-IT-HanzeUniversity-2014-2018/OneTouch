@@ -1,5 +1,6 @@
-html, body, .scroll {
+.scroll {
 	height: 100% !important;
+	background: #f6f6f6;
 }
 
 .loading {
@@ -23,6 +24,7 @@ html, body, .scroll {
 	font-size: 26px;
 	font-size: 7vw;
 	border-bottom:1px solid #e7dfe2;
+	background:#387ef5;
 }
 .profile-bar i {
 	font-size:34px;
@@ -41,6 +43,11 @@ html, body, .scroll {
 	text-decoration: none;
 	color:black;
 }
+
+.tile:focus{
+	background: red;
+}
+
 .tile-icon {
 	margin-top:23px;
 	margin-top:6vw;
