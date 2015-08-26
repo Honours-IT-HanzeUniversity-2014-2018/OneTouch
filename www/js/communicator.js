@@ -1,11 +1,11 @@
 function getData(url, object) {
     var xmlhttp = new XMLHttpRequest();
-    var baseUrl = "http://145.37.65.36/:9080/api/v1/";
+    var baseUrl = "http://145.37.65.36:9080/api/v1/";
 
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             object.responseText = xmlhttp.responseText;
-            object.response = true;
+            object.response2 = true;
         }
     }
 
@@ -14,7 +14,7 @@ function getData(url, object) {
 }
 
 function getUserProfile(object) {
-    object.response = false;
+    object.response2 = false;
     getData("user/profile.json", object);
 }
 

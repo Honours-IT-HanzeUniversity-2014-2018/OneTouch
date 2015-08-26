@@ -2,7 +2,8 @@ angular.module('starter.controllers', [])
 
 .controller('ModuleCtrl', function($scope) {
 	var module = $scope;
-	module.information = [];
+	module.information = {};
+  getUserProfile(module.information);
 });
 
 /*
