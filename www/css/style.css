@@ -42,11 +42,13 @@
 	box-sizing:border-box;
 	text-decoration: none;
 	color:black;
+	margin-top:1px;
+}
+.tile:hover{
+	background:#e7dfe2;
 }
 
-.tile:focus{
-	background: red;
-}
+
 
 .tile-icon {
 	margin-top:23px;
