@@ -5,7 +5,6 @@ function getData(url, object) {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             object = xmlhttp.responseText;
-            object.response = true;
         }
     }
 
@@ -14,7 +13,6 @@ function getData(url, object) {
 }
 
 function getUserProfile(object) {
-    object.response = false;
     getData("user/profile.json", object);
 }
 
