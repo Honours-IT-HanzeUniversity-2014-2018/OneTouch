@@ -45,9 +45,14 @@
 	margin-top:1px;
 }
 .tile:hover{
-	background:#e7dfe2;
+	background:#f7f7f7;
 }
-
+a.tile:hover{
+	background:#f7f7f7;
+}
+a.tile {
+	text-decoration: none;
+}
 
 
 .tile-icon {

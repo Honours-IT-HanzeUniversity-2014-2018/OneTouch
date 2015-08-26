@@ -10,7 +10,10 @@
                 {{profile.profile.fullname}}
             </div>
         <ion-scroll zooming="false" direction="y" style="height:100%">
-            
+            <!-- als er geen internetconnectie is -->
+            <span>
+                Geen internetconnectie: {{currentStatus}}
+            </span>
 
             <span ng-repeat="item in menu.data">
                 <a ui-sref="menu({endpoint: item.action})" ng-if="item.is_menu">
@@ -23,7 +26,7 @@
                         </div>
                     </div>
                 </a>
-                <a ng-if="!item.is_menu">
+                <a ng-if="!item.is_menu" ng-click="itemClicked(item)">
                     <div class="tile">
                         <div class="tile-icon">
                             <i ng-class="'ion-' + item.icon"></i>

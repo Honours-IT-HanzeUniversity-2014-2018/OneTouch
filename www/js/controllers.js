@@ -37,21 +37,32 @@ angular.module('OneTouch.controllers', ['ngResource'])
         }
 
         return {
-            getStatus: getStatus(),
+            getStatus: getStatus,
             reloadStatus: reload
         }
 
     }])
 
     .controller('MenuController',
-    ['OneTouchAPI', 'Profile', '$scope', '$state', '$stateParams',
-    function (OneTouchAPI, Profile, $scope, $state, $stateParams) {
+    ['OneTouchAPI','Status', 'Profile', '$scope', '$state', '$stateParams',
+    function (OneTouchAPI, Status, Profile, $scope, $state, $stateParams) {
+        var status  = Status.getStatus();
         var endpoint = '/api/v1/main/menu.json';
         if($stateParams.endpoint !== undefined)
             endpoint = $stateParams.endpoint;
 
         $scope.profile = Profile.get();
         $scope.menu = OneTouchAPI.get(endpoint);
+
+        $scope.itemClicked = function(item){
+            OneTouchAPI.get(item.action).$promise.then(
+                function(response){
+                    alert('succeed');
+                }, function(error){
+                   alert('Geen actie gekoppeld');
+                }
+            );
+        }
     }])
 
     .controller('StatusController',
@@ -69,19 +80,3 @@ angular.module('OneTouch.controllers', ['ngResource'])
         reloadStatus();
     }])
     ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
