@@ -1,0 +1,25 @@
+<ion-view can-swipe-back="true" hide-nav-bar="false" style="height: 100%">
+	<ion-nav-title>{{menu.title}}</ion-nav-title>
+
+
+    <ion-content class="has-header" style="height: 100%">
+        <ion-spinner class="loading" icon="spiral" ng-hide="menu.success"></ion-spinner>
+        <ion-scroll zooming="false" direction="y" style="height:100%">
+            <div class="profile-bar" ng-hide="!menu.show_profile">
+                <i class="icon ion-person"></i>
+                {{profile.profile.fullname}}
+            </div>
+
+            <a ng-repeat="item in menu.data" ui-sref="menu({endpoint: item.action})">
+                <div class="tile">
+                    <div class="tile-icon">
+                        <i ng-class="'ion-' + item.icon"></i>
+                    </div>
+                    <div class="tile-title">
+                        {{item.title}}
+                    </div>
+                </div>
+            </a>
+        </ion-scroll>
+    </ion-content>
+</ion-view>
