@@ -1,24 +1,21 @@
-body {
-	
-}
-
-.header-padding {
-	padding-top:17.3vw;
-}
-
 .profile-bar {
 	text-align: center;
+	height:50px;
 	height:13vw;
+	line-height: 49px;
 	line-height: 13vw;
+	font-size: 26px;
 	font-size: 7vw;
 	border-bottom:1px solid #e7dfe2;
 }
 .profile-bar i {
+	font-size:34px;
 	font-size:9vw;
 }
 
 .tile {
 	width:50%;
+	height:180px;
 	height:43vw;
 	float:left;
 	background:#fff;
@@ -29,8 +26,7 @@ body {
 	color:black;
 }
 .tile-icon {
-	width:30vw;
-	height:20vw;
+	margin-top:23px;
 	margin-top:6vw;
 	margin-left:auto;
 	margin-right:auto;
@@ -41,6 +37,7 @@ body {
 	height:100%;
 }
 .tile-icon i {
+	font-size:91px;
 	font-size:24vw;
 	text-align: center;
 	display: inline-block;
@@ -48,6 +45,9 @@ body {
 }
 .tile-title {
 	text-align: center;
+	margin-top:15px;
 	margin-top:4vw;
+	font-size:30px;
 	font-size:8vw;
+	text-decoration: none;
 }
