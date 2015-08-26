@@ -34,9 +34,9 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       templateUrl: 'templates/dashboard.html'
     })
 
-    .state('televisie', {
-      url: '/tv',
-      templateUrl: 'templates/televisie.html'
+    .state('module', {
+      url: '/module',
+      templateUrl: 'templates/module.html'
     });
 
   // if none of the above states are matched, use this as the fallback
