@@ -6,7 +6,7 @@
 		  	<div class="profile-bar">
 		  		<i class="icon ion-person"></i> 
 		  		<!-- get profile name data if connected -->
-		  		Jeroen
+		  		{{information.info.profile.fullname}}
 		  	</div>
 
 		  	<!-- foreach loop of all modules (from the JSON data) -->
@@ -42,10 +42,6 @@
 			   		</div>
 			   	</div>
 		   	</a>
-
-		   	<div class="tile">
-		   		DATA: {{information}}
-		   	</div>
 
 		</ion-scroll>
 	</ion-content>
