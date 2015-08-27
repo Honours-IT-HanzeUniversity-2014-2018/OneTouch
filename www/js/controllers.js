@@ -68,7 +68,9 @@ angular.module('OneTouch.controllers', ['ngResource'])
             item.loading = true;
             OneTouchAPI.get(item.action).$promise.then(
                 function(response){
-                    item = response.data;
+                    for(var i in response.data) {
+                        item[i] = response.data[i];
+                    }
                     item.loading = false;
                 }, function(error){
                     alert("Action mislukt");

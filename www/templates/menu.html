@@ -17,7 +17,8 @@
                         Niet verbonden met de hub
                     </div>
                     <div class="item item-text-wrap">
-                        Als het icoontje rechtsbovenin het scherm groen is, klik dan op de onderstaande knop om het scherm te verversen
+                        Als het icoontje rechtsbovenin het scherm groen is, klik dan op de onderstaande
+                        knop om het scherm te verversen.
                         <button ng-click="reloadPage()">Ververs pagina</button>
                     </div>
                 </div>
@@ -38,7 +39,8 @@
                 <a ng-if="!item.is_menu" ng-click="itemClicked(item)">
                     <div class="tile">
                         <div class="tile-icon">
-                            <i ng-class="'ion-' + item.icon"></i>
+                            <i ng-class="'ion-' + item.icon" ng-hide="item.loading"></i>
+                            <ion-spinner class="loader" icon="spiral" ng-show="item.loading"></ion-spinner>
                         </div>
                         <div class="tile-title">
                             {{item.title}}
