@@ -19,7 +19,7 @@
 
 .tile {
 	width:50%;
-    padding: 0 25px 25px 25px;
+    padding: 0 0 25px 0;
 	float:left;
 	background:#fff;
 	border-right:1px solid #e7dfe2;
@@ -28,6 +28,9 @@
 	text-decoration: none;
 	color:black;
 	margin-top:1px;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    height: 175px;
 }
 .tile:hover{
 	background:#f7f7f7;

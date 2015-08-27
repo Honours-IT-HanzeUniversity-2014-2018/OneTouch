@@ -44,55 +44,56 @@ angular.module('OneTouch.controllers', ['ngResource'])
     }])
 
     .controller('MenuController',
-    ['OneTouchAPI','Status', 'Profile', '$scope', '$state', '$stateParams',
-    function (OneTouchAPI, Status, Profile, $scope, $state, $stateParams) {
-        $scope.reloadPage = function(){
+        ['OneTouchAPI','Status', 'Profile', '$scope', '$state', '$stateParams',
+        function (OneTouchAPI, Status, Profile, $scope, $state, $stateParams) {
+            $scope.reloadPage = function(){
+                $scope.profile = Profile.get();
+                $scope.menu = OneTouchAPI.get(endpoint);
+            };
+
+            $scope.status = Status.getStatus();
+
+            var endpoint = '/api/v1/main/menu.json';
+
+            if($stateParams.endpoint !== undefined){
+                endpoint = $stateParams.endpoint;
+            }
+
             $scope.profile = Profile.get();
             $scope.menu = OneTouchAPI.get(endpoint);
-        };
 
-        $scope.status = Status.getStatus();
+            $scope.itemClicked = function(item){
+                if(item.action == null) return;
 
-        var endpoint = '/api/v1/main/menu.json';
-
-        if($stateParams.endpoint !== undefined){
-            endpoint = $stateParams.endpoint;
-        }
-
-        $scope.profile = Profile.get();
-        $scope.menu = OneTouchAPI.get(endpoint);
-
-        $scope.itemClicked = function(item){
-            if(item.action == null) return;
-
-            item.loading = true;
-            OneTouchAPI.get(item.action).$promise.then(
-                function(response){
-                    for(var i in response.data) {
-                        item[i] = response.data[i];
+                item.loading = true;
+                OneTouchAPI.get(item.action).$promise.then(
+                    function(response){
+                        for(var i in response.data) {
+                            item[i] = response.data[i];
+                        }
+                        item.loading = false;
+                    }, function(error){
+                        alert("Action mislukt");
+                        item.loading = false;
                     }
-                    item.loading = false;
-                }, function(error){
-                    alert("Action mislukt");
-                    item.loading = false;
-                }
-            );
+                );
+            }
         }
-    }
     ])
 
     .controller('StatusController',
-    ['OneTouchAPI', 'Status', '$scope', function(OneTouchAPI, Status, $scope){
+        ['OneTouchAPI', 'Status', '$scope',
+        function(OneTouchAPI, Status, $scope){
+            var reloadStatus = function(){
+                Status.reloadStatus(function(response){
+                    $scope.status = response;
+                }, function(error){
+                    $scope.status = error;
+                })
+            };
 
-        var reloadStatus = function(){
-            Status.reloadStatus(function(response){
-                $scope.status = response;
-            }, function(error){
-                $scope.status = error;
-            })
-        };
-
-        setInterval(reloadStatus, 2000);
-        reloadStatus();
-    }])
+            setInterval(reloadStatus, 2000);
+            reloadStatus();
+        }
+    ])
     ;
