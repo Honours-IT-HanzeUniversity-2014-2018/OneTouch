@@ -40,10 +40,11 @@
                         </div>
                     </div>
                 </a>
-                <a ng-if="!item.is_menu" ng-click="itemClicked(item)">
-                    <div class="tile">
+                <a ng-if="!item.is_menu" ng-click="itemClicked(item, this)">
+                    <div class="tile" ng-class="item.statuses">
                         <div class="tile-icon">
-                            <i ng-class="'ion-' + item.icon" ng-hide="item.loading"></i>
+                            <i class="ion-checkmark-round" ng-show="item.show_check"></i>
+                            <i ng-class="'ion-' + item.icon" ng-hide="item.loading || item.show_check"></i>
                             <ion-spinner class="loader" icon="spiral" ng-show="item.loading"></ion-spinner>
                         </div>
                         <div class="tile-title">

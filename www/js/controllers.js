@@ -63,15 +63,23 @@ angular.module('OneTouch.controllers', ['ngResource'])
             $scope.menu = OneTouchAPI.get(endpoint);
 
             $scope.itemClicked = function(item){
-                if(item.action == null) return;
+                if(item.action == null || item.loading || item.show_check) return;
 
                 item.loading = true;
                 OneTouchAPI.get(item.action).$promise.then(
                     function(response){
-                        for(var i in response.data) {
-                            item[i] = response.data[i];
-                        }
                         item.loading = false;
+
+                        item.statuses += ' check';
+                        item.show_check = true;
+
+                        setTimeout(function() {
+                            item.show_check = false;
+
+                            for(var i in response.data)
+                                item[i] = response.data[i];
+                        }, 1000);
+
                     }, function(error){
                         alert("Action mislukt");
                         item.loading = false;
