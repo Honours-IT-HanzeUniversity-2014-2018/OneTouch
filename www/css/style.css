@@ -88,6 +88,9 @@ a.tile {
 	text-align: center;
 	border-top:1px solid #e7dfe2;
 }
+.mic-field:hover {
+	background:red;
+}
 
 .check {
     background-color: #018c00;

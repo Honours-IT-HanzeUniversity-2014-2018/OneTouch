@@ -57,12 +57,9 @@
             <!-- Microphone field-->
             <div class="mic-field" ng-if="menu.show_profile">
                 <i class="ion-mic-a"></i>
-                <span class="mic-speec-text"></span>
-                <!--
-                <div onclick="recognizeSpeech();">Start recognition</div>
-                <div onclick="stopRecognition();">Stop recognition</div>
-                <div onclick="getSupportedLanguages();">Get Supported Languages</div>
-                -->
+                <span onclick="recognizeSpeech();" class="mic-speec-text"></span>
+
+                <button onclick="stopRecognition();">Stop recognition</button>
             </div>
         </ion-scroll>
         
