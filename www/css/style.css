@@ -4,7 +4,6 @@
 }
 
 .loading {
-	position: absolute;
 	top: 50%;
 	left: 50%;
     margin-top: -25px;
@@ -31,6 +30,9 @@
     -ms-text-overflow: ellipsis;
     text-overflow: ellipsis;
     height: 175px;
+    text-align: center;
+
+    transition: background-color 0.2s;
 }
 .tile:hover{
 	background:#f7f7f7;
@@ -42,19 +44,28 @@ a.tile {
 	text-decoration: none;
 }
 
-.tile-icon, .tile-icon .loader {
-	margin-top:23px;
+.tile-icon {
+    position: relative;
 	margin-left:auto;
 	margin-right:auto;
+    margin-top: 25px;
+    width: 75px;
+    height: 80px;
 }
 
 .tile-icon .loader svg {
     height: 75px;
     width: 75px;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.tile-icon .loader {
+    width: 100%;
 }
 
 .tile-icon i {
-	font-size:80px;
+	font-size:75px;
 	text-align: center;
 	display: inline-block;
     width: 100%;
@@ -76,4 +87,9 @@ a.tile {
 	font-size:80px;
 	text-align: center;
 	border-top:1px solid #e7dfe2;
+}
+
+.check {
+    background-color: #018c00;
+    color: #fff;
 }
