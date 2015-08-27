@@ -64,7 +64,8 @@
                 <ion-spinner class='speakingSpinner' icon='spiral' ng-show="speaking" ng-click="doneSpeech()"></ion-spinner>
 
                 <div class="speechButtons">
-                    <button ng-click="restartSpeech()">Opnieuw</button>
+                    <button class="resetBtn" ng-show="speaking" ng-click="restartSpeech()">Stop</button>
+                    <button class="resetBtn" ng-hide="speaking" ng-click="restartSpeech()">Opnieuw</button>
                     <button ng-click="cancelAndCloseSpeech()">Annuleer</button>
                 </div>
             </div>

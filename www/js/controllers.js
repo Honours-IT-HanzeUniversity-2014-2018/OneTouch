@@ -2,7 +2,6 @@ angular.module('OneTouch.controllers', ['ngResource'])
 
     .constant('OneTouchConfig', {
           baseUrl: 'http://bb01.honours.robbytu.net:8090'
-          
     })
 
     .factory('OneTouchAPI', ['OneTouchConfig', '$resource', function(OneTouchConfig, $resource) {
@@ -87,8 +86,13 @@ angular.module('OneTouch.controllers', ['ngResource'])
             };
             
             $scope.restartSpeech = function(){
-                $scope.doneSpeech();
-                $scope.startSpeech(); 
+                if($scope.speaking == false){
+                    $scope.startSpeech();
+                } else {
+                    $scope.doneSpeech();
+                }
+                
+                
             };
 
             
