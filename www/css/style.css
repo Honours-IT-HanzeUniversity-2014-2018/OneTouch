@@ -4,16 +4,13 @@
 }
 
 .loading {
-	top: 50%;
-	left: 50%;
-    margin-top: -25px;
-    margin-left: -35px;
-	z-index: 100000;
+	margin-top: 42%;
+	margin-left: 42%;
 }
 
 .loading svg {
-	width: 50px;
-	height: 50px;
+	width: 16%;
+	height: 16%;
 }
 
 .tile {
@@ -64,6 +61,17 @@ a.tile {
     width: 100%;
 }
 
+.speakingSpinner svg {
+    height: 15%;
+    width: 15%;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.speakingSpinner {
+    width: 100%;
+}
+
 .tile-icon i {
 	font-size:75px;
 	text-align: center;
@@ -87,9 +95,65 @@ a.tile {
 	font-size:80px;
 	text-align: center;
 	border-top:1px solid #e7dfe2;
+	-webkit-box-shadow: 0px -1px 8px 0px rgba(0,0,0,0.22);
+	-moz-box-shadow: 0px -1px 8px 0px rgba(0,0,0,0.22);
+	box-shadow: 0px -1px 8px 0px rgba(0,0,0,0.22);
+	
+	-moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    -webkit-transition: 1s;
+    transition: 1s;
 }
-.mic-field:hover {
-	background:red;
+
+.speech-modal {
+	height:100%;
+	background-color: #fff;
+	-webkit-box-shadow: inset 0px -1px 8px 0px rgba(0,0,0,0.51);
+	-moz-box-shadow: inset 0px -1px 8px 0px rgba(0,0,0,0.51);
+	box-shadow: inset 0px -1px 8px 0px rgba(0,0,0,0.51);
+}
+.speechIntro{
+	width:100%;
+	padding: 0px 10px;
+	display:none;
+	font-size:20px;
+	line-height:20px;
+}
+.speechText {
+	font-size:20px;
+	line-height:20px;
+	padding:20px 0;
+}
+.speechButtons {
+	position:absolute;
+	width:100%;
+	bottom:10vw;
+	display:none;
+}
+.speechButtons button{
+	width:33.333333%;
+	float:left;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0px;
+	color: #ffffff;
+	font-size: 15px;
+	background: #387ef5;
+	padding: 15px 20px;
+	border: solid #3372dd 1px;
+	text-decoration: none;
+}
+.refreshBtn{
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0px;
+	color: #ffffff;
+	font-size: 20px;
+	background: #387ef5;
+	padding: 10px 20px;
+	border: solid #3372dd 1px;
+	text-decoration: none;
 }
 
 .check {

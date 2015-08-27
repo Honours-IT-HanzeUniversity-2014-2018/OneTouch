@@ -6,18 +6,22 @@ function onDeviceReady(){
 function recognizeSpeech() {
   var maxMatches = 5;
   var language = "nl-NL";
-  alert(window.plugins);
-  alert(window.plugins.speechrecognizer);
+  //alert(window.plugins);
+  //alert(window.plugins.speechrecognizer);
+  console.log('started');
   window.plugins.speechrecognizer.start(resultCallback, errorCallback, maxMatches, language);
 }
 
 function stopRecognition(){
-  window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
-
+  console.log('stopped');
+  window.plugins.speechrecognizer.stop();
+  //window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
+  
 }
 
 function resultCallback (result){
-  alert('result, ' +result.results[0][0].transcript);
+  $('.speechIntro').html("Gesproken text hier");
+  //$('.speechIntro').append('"' +result.results[0][0].transcript + '"');
 }
 
 function errorCallback(error){

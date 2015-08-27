@@ -2,6 +2,7 @@ angular.module('OneTouch.controllers', ['ngResource'])
 
     .constant('OneTouchConfig', {
           baseUrl: 'http://bb01.honours.robbytu.net:8090'
+         
     })
 
     .factory('OneTouchAPI', ['OneTouchConfig', '$resource', function(OneTouchConfig, $resource) {
@@ -46,21 +47,49 @@ angular.module('OneTouch.controllers', ['ngResource'])
     .controller('MenuController',
         ['OneTouchAPI','Status', 'Profile', '$scope', '$state', '$stateParams',
         function (OneTouchAPI, Status, Profile, $scope, $state, $stateParams) {
-            $scope.reloadPage = function(){
-                $scope.profile = Profile.get();
-                $scope.menu = OneTouchAPI.get(endpoint);
-            };
-
             $scope.status = Status.getStatus();
-
+            $scope.profile = Profile.get();
+            $scope.menu = OneTouchAPI.get(endpoint);
             var endpoint = '/api/v1/main/menu.json';
+            var modalActivate = false;
 
             if($stateParams.endpoint !== undefined){
                 endpoint = $stateParams.endpoint;
             }
 
-            $scope.profile = Profile.get();
-            $scope.menu = OneTouchAPI.get(endpoint);
+            $scope.startSpeech = function(){                
+                if(modalActivate == false){
+                    $('.mic-field').addClass('speech-modal');
+                    $('.speechButtons').fadeIn(function(){
+                        $('.speechIntro').fadeIn();
+                        modalActivate = true;
+                    });  
+                    recognizeSpeech(); 
+                }
+            };
+            $scope.cancelSpeech = function(){
+                if(modalActivate == true){
+                    
+                    $('.speechIntro').fadeOut();
+                    $('.mic-field').removeClass('speech-modal');
+                    $('.speechButtons').fadeOut(function(){
+                        modalActivate = false;                 
+                    });
+                    stopRecognition();
+                }
+            }
+            $scope.restartSpeech = function(){
+                stopRecognition();
+                recognizeSpeech(); 
+            }
+            $scope.okay = function(){
+                $('.speechText').html("okay...");
+            }
+
+            $scope.reloadPage = function(){
+                $scope.profile = Profile.get();
+                $scope.menu = OneTouchAPI.get(endpoint);
+            };
 
             $scope.itemClicked = function(item){
                 if(item.action == null || item.loading || item.show_check) return;
