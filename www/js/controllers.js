@@ -76,16 +76,14 @@ angular.module('OneTouch.controllers', ['ngResource'])
                     modalActivate = true;
                 });
                 $scope.speaking = true;
-                
                 recognizeSpeech(); 
             };
 
             $scope.doneSpeech = function(){
                 $scope.speaking = false;
                 $('.speechText').html('"Ingesproken text hier"');
-                stopRecognition();
                 //$('.speechText').html('"'+ resultCallback() + '+');
-
+                stopRecognition(); //Deze moet naar boven verplaatst worden als die het doet
             };
             
             $scope.restartSpeech = function(){
