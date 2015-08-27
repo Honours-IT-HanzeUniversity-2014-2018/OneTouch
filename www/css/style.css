@@ -5,8 +5,10 @@
 
 .loading {
 	position: absolute;
-	top: calc(50% - 12px);
-	left: calc(50% - 12px);
+	top: 50%;
+	left: 50%;
+    margin-top: -25px;
+    margin-left: -35px;
 	z-index: 100000;
 }
 
@@ -17,8 +19,7 @@
 
 .tile {
 	width:50%;
-	height:180px;
-	height:43vw;
+    padding: 0 25px 25px 25px;
 	float:left;
 	background:#fff;
 	border-right:1px solid #e7dfe2;
@@ -40,32 +41,25 @@ a.tile {
 
 .tile-icon, .tile-icon .loader {
 	margin-top:23px;
-	margin-top:6vw;
 	margin-left:auto;
 	margin-right:auto;
 }
 
-.tile-icon img {
-	width:100%;
-	height:100%;
-}
-
 .tile-icon .loader svg {
-    height: 91px;
-    width: 91px;
+    height: 75px;
+    width: 75px;
 }
 
 .tile-icon i {
-	font-size:91px;
+	font-size:80px;
 	text-align: center;
 	display: inline-block;
     width: 100%;
 }
+
 .tile-title {
 	text-align: center;
 	margin-top:15px;
-	margin-top:4vw;
 	font-size:30px;
-	font-size:8vw;
 	text-decoration: none;
 }
