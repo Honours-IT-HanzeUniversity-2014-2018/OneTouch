@@ -2,7 +2,7 @@ angular.module('OneTouch.controllers', ['ngResource'])
 
     .constant('OneTouchConfig', {
           baseUrl: 'http://bb01.honours.robbytu.net:8090'
-         
+          
     })
 
     .factory('OneTouchAPI', ['OneTouchConfig', '$resource', function(OneTouchConfig, $resource) {
@@ -47,49 +47,72 @@ angular.module('OneTouch.controllers', ['ngResource'])
     .controller('MenuController',
         ['OneTouchAPI','Status', 'Profile', '$scope', '$state', '$stateParams',
         function (OneTouchAPI, Status, Profile, $scope, $state, $stateParams) {
-            $scope.status = Status.getStatus();
-            $scope.profile = Profile.get();
-            $scope.menu = OneTouchAPI.get(endpoint);
-            var endpoint = '/api/v1/main/menu.json';
             var modalActivate = false;
-
-            if($stateParams.endpoint !== undefined){
-                endpoint = $stateParams.endpoint;
-            }
-
-            $scope.startSpeech = function(){                
-                if(modalActivate == false){
+            var speaking = false;
+            $scope.speaking = false;
+            
+            $scope.openAndStartSpeech = function(){                
+                if(modalActivate == false){ 
                     $('.mic-field').addClass('speech-modal');
-                    $('.speechButtons').fadeIn(function(){
-                        $('.speechIntro').fadeIn();
-                        modalActivate = true;
-                    });  
-                    recognizeSpeech(); 
+                    $('.speechButtons').fadeIn(); 
+                    $scope.startSpeech();
                 }
             };
-            $scope.cancelSpeech = function(){
+            $scope.cancelAndCloseSpeech = function(){
                 if(modalActivate == true){
-                    
-                    $('.speechIntro').fadeOut();
+                    $('.speechText').fadeOut();
                     $('.mic-field').removeClass('speech-modal');
                     $('.speechButtons').fadeOut(function(){
-                        modalActivate = false;                 
+                        modalActivate = false; 
                     });
-                    stopRecognition();
+                    $scope.speaking = false;
+                    cancelRecognition();
                 }
-            }
-            $scope.restartSpeech = function(){
-                stopRecognition();
+            };
+
+            $scope.startSpeech = function(){
+                $('.speechText').html('U kunt beginnen met praten <br> druk op het laad icoontje om te stoppen');
+                $('.speechText').fadeIn(function(){
+                    modalActivate = true;
+                });
+                $scope.speaking = true;
+                
                 recognizeSpeech(); 
-            }
-            $scope.okay = function(){
-                $('.speechText').html("okay...");
-            }
+            };
+
+            $scope.doneSpeech = function(){
+                stopRecognition();
+                $scope.speaking = false;
+                //$('.speechText').html('"'+ resultCallback() + '+');
+                $('.speechText').html('"Ingesproken text hier"');
+            };
+            
+            $scope.restartSpeech = function(){
+                $scope.doneSpeech();
+                $scope.startSpeech(); 
+            };
+
+            
+
+
+
+
+
 
             $scope.reloadPage = function(){
                 $scope.profile = Profile.get();
                 $scope.menu = OneTouchAPI.get(endpoint);
             };
+
+            $scope.status = Status.getStatus();
+            var endpoint = '/api/v1/main/menu.json';
+
+            if($stateParams.endpoint !== undefined){
+                endpoint = $stateParams.endpoint;
+            }
+
+            $scope.profile = Profile.get();
+            $scope.menu = OneTouchAPI.get(endpoint);
 
             $scope.itemClicked = function(item){
                 if(item.action == null || item.loading || item.show_check) return;

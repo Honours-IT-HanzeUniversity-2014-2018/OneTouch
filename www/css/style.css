@@ -132,7 +132,7 @@ a.tile {
 	display:none;
 }
 .speechButtons button{
-	width:33.333333%;
+	width:50%;
 	float:left;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
@@ -154,6 +154,12 @@ a.tile {
 	padding: 10px 20px;
 	border: solid #3372dd 1px;
 	text-decoration: none;
+}
+.mic-on {
+	color:red;
+}
+.mic-off {
+	color:black;
 }
 
 .check {

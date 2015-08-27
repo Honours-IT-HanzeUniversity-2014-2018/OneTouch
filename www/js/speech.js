@@ -13,15 +13,18 @@ function recognizeSpeech() {
 }
 
 function stopRecognition(){
+  //DATA GELIJK VERZENDEN
   console.log('stopped');
+  window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
+}
+
+function cancelRecognition(){
+  console.log('canceled');
   window.plugins.speechrecognizer.stop();
-  //window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
-  
 }
 
 function resultCallback (result){
-  $('.speechIntro').html("Gesproken text hier");
-  //$('.speechIntro').append('"' +result.results[0][0].transcript + '"');
+  return result.results[0][0].transcript;
 }
 
 function errorCallback(error){
