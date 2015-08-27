@@ -15,22 +15,6 @@
 	height: 50px;
 }
 
-.profile-bar {
-	text-align: center;
-	height:50px;
-	height:13vw;
-	line-height: 49px;
-	line-height: 13vw;
-	font-size: 26px;
-	font-size: 7vw;
-	border-bottom:1px solid #e7dfe2;
-	background:#387ef5;
-}
-.profile-bar i {
-	font-size:34px;
-	font-size:9vw;
-}
-
 .tile {
 	width:50%;
 	height:180px;
