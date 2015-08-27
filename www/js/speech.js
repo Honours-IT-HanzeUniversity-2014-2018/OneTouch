@@ -4,7 +4,9 @@ function onDeviceReady(){
 
 function recognizeSpeech() {
   var maxMatches = 5;
-  var language = "en-US";
+  var language = "nl-NL";
+  alert(window.plugins);
+  alert(window.plugins.speechrecognizer);
   window.plugins.speechrecognizer.start(resultCallback, errorCallback, maxMatches, language);
 }
 
@@ -14,12 +16,11 @@ function stopRecognition(){
 }
 
 function resultCallback (result){
-  console.log(result);
-  alert(result.results[0][0].transcript);
+  alert('result, ' +result.results[0][0].transcript);
 }
 
 function errorCallback(error){
-  console.log(error);
+  alert('error, ' +error);
 }
 
 // Show the list of the supported languages

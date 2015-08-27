@@ -90,6 +90,6 @@ a.tile {
 }
 
 .check {
-    background-color: #018c00;
+    background-color: #018c00 !important;
     color: #fff;
 }
