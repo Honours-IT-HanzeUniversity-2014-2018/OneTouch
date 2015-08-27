@@ -25,20 +25,21 @@ angular.module('OneTouch.controllers', ['ngResource'])
                 function(response){
                     currentStatus = response;
                     success(currentStatus);
-                }, function(error){
+                }, function(response){
+                    console.log("De hongaren vallen aan");
                     currentStatus = {};
                     error(currentStatus);
                 }
-            ); 
-        }
+            );
+        };
 
         var getStatus = function(){
             return currentStatus;
-        }
+        };
 
         return {
             getStatus: getStatus,
-            reloadStatus: reload 
+            reloadStatus: reload
         }
 
     }])
@@ -47,16 +48,19 @@ angular.module('OneTouch.controllers', ['ngResource'])
     ['OneTouchAPI','Status', 'Profile', '$scope', '$state', '$stateParams',
     function (OneTouchAPI, Status, Profile, $scope, $state, $stateParams) {
         $scope.reloadPage = function(){
-            $scope.profile = Profile.get(); 
+            $scope.profile = Profile.get();
             $scope.menu = OneTouchAPI.get(endpoint);
-        }
+        };
+
+        $scope.status = Status.getStatus();
 
         var endpoint = '/api/v1/main/menu.json';
+
         if($stateParams.endpoint !== undefined){
             endpoint = $stateParams.endpoint;
         }
 
-        $scope.profile = Profile.get(); 
+        $scope.profile = Profile.get();
         $scope.menu = OneTouchAPI.get(endpoint);
 
         $scope.itemClicked = function(item){
@@ -68,11 +72,11 @@ angular.module('OneTouch.controllers', ['ngResource'])
                 }
             );
         }
-    }])
+    }
+    ])
 
     .controller('StatusController',
-    ['OneTouchAPI', 'Status', '$scope', function(OneTouchAPI, Status, $scope){  
-
+    ['OneTouchAPI', 'Status', '$scope', function(OneTouchAPI, Status, $scope){
 
         var reloadStatus = function(){
             Status.reloadStatus(function(response){
@@ -80,7 +84,7 @@ angular.module('OneTouch.controllers', ['ngResource'])
             }, function(error){
                 $scope.status = error;
             })
-        }
+        };
 
         setInterval(reloadStatus, 2000);
         reloadStatus();
