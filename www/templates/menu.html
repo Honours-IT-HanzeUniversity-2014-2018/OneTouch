@@ -10,11 +10,12 @@
     </ion-nav-title>
 
 
-    <ion-content class="has-header" style="height: 100%">
+    <ion-content class="has-header">
         <ion-spinner class="loading" icon="spiral" ng-hide="menu.success">
         </ion-spinner>
             
-        <ion-scroll zooming="false" direction="y" style="height:100%">
+        <ion-scroll zooming="false" direction="y" style="height:100%
+        ">
             <!-- als er geen internetconnectie is -->
             <span ng-hide="status.success || menu.success">
                 <div class="card">
@@ -52,6 +53,15 @@
                     </div>
                 </a>
             </span>
+            <!-- Microphone field-->
+            <div class="mic-field" ng-if="menu.show_profile">
+                <i class="ion-mic-a"></i>
+                <span class="mic-speec-text"></span>
+                <button onclick="recognizeSpeech();">Start recognition</button>
+        <button onclick="stopRecognition();">Stop recognition</button>
+        <button onclick="getSupportedLanguages();">Get Supported Languages</button>
+            </div>
         </ion-scroll>
+        
     </ion-content>
 </ion-view>
