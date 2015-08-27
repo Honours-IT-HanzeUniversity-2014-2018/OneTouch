@@ -26,7 +26,6 @@ angular.module('OneTouch.controllers', ['ngResource'])
                     currentStatus = response;
                     success(currentStatus);
                 }, function(response){
-                    console.log("De hongaren vallen aan");
                     currentStatus = {};
                     error(currentStatus);
                 }
@@ -64,11 +63,16 @@ angular.module('OneTouch.controllers', ['ngResource'])
         $scope.menu = OneTouchAPI.get(endpoint);
 
         $scope.itemClicked = function(item){
+            if(item.action == null) return;
+
+            item.loading = true;
             OneTouchAPI.get(item.action).$promise.then(
                 function(response){
-                    alert('succeed');
+                    item = response.data;
+                    item.loading = false;
                 }, function(error){
-                   alert('Geen actie gekoppeld');
+                    alert("Action mislukt");
+                    item.loading = false;
                 }
             );
         }

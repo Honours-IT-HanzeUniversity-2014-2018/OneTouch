@@ -11,7 +11,7 @@
             </div>
         <ion-scroll zooming="false" direction="y" style="height:100%">
             <!-- als er geen internetconnectie is -->
-            <span ng-hide="menu.success">
+            <span ng-hide="status.success || menu.success">
                 <div class="card">
                     <div class="item item-divider">
                         Niet verbonden met de hub
