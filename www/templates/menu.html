@@ -10,7 +10,6 @@
     </ion-nav-title>
 
 
-
     <ion-content class="has-header">
         <ion-spinner class="loading" icon="spiral" ng-hide="menu.success">
         </ion-spinner>
@@ -20,8 +19,6 @@
             <span ng-hide="status.success || menu.success">
                 <div class="card">
                     <div class="item item-divider">
-                        {{status}}
-                        {{menu}}
                         Niet verbonden met de hub
                     </div>
                     <div class="item item-text-wrap">
@@ -59,10 +56,9 @@
             <!-- Microphone field-->
             <div class="mic-field" ng-if="menu.show_profile">
                 <i class="ion-mic-a"></i>
-                <span class="mic-speec-text"></span>
-                <a href="#" onclick="recognizeSpeech();">Start recognition</a>
-        <a href="#" onclick="stopRecognition();">Stop recognition</a>
-        <a href="#" onclick="getSupportedLanguages();">Get Supported Languages</a>
+                <span onclick="recognizeSpeech();" class="mic-speec-text"></span>
+
+                <button onclick="stopRecognition();">Stop recognition</button>
             </div>
         </ion-scroll>
         
