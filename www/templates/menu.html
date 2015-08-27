@@ -1,17 +1,22 @@
 <ion-view can-swipe-back="true" hide-nav-bar="false" style="height: 100%">
-	<ion-nav-title>{{menu.title}}</ion-nav-title>
+	<ion-nav-title>
+        <div ng-if="menu.show_profile">
+            <i class="icon ion-person"></i>
+            {{profile.profile.fullname}}
+        </div>
+        <div ng-if="!menu.show_profile">
+            {{menu.title}}
+        </div>
+    </ion-nav-title>
 
 
     <ion-content class="has-header" style="height: 100%">
         <ion-spinner class="loading" icon="spiral" ng-hide="menu.success">
         </ion-spinner>
-            <div class="profile-bar" ng-hide="!menu.show_profile">
-                <i class="icon ion-person"></i>
-                {{profile.profile.fullname}}
-            </div>
+            
         <ion-scroll zooming="false" direction="y" style="height:100%">
             <!-- als er geen internetconnectie is -->
-            <span ng-hide="menu.success">
+            <span ng-hide="status">
                 <div class="card">
                     <div class="item item-divider">
                         Niet verbonden met de hub
