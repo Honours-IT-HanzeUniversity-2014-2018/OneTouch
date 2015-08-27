@@ -11,8 +11,17 @@
             </div>
         <ion-scroll zooming="false" direction="y" style="height:100%">
             <!-- als er geen internetconnectie is -->
-            <span>
-                Geen internetconnectie: {{currentStatus}}
+            <span ng-hide="menu.success">
+                <div class="card">
+                    <div class="item item-divider">
+                        Niet verbonden met de hub
+                    </div>
+                    <div class="item item-text-wrap">
+                        Als het icoontje rechtsbovenin het scherm groen is, klik dan op de onderstaande knop om het scherm te verversen
+                        <button ng-click="reloadPage()">Ververs pagina</button>
+                    </div>
+                </div>
+                
             </span>
 
             <span ng-repeat="item in menu.data">

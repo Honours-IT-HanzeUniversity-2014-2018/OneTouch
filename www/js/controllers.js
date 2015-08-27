@@ -6,7 +6,7 @@ angular.module('OneTouch.controllers', ['ngResource'])
 
     .factory('OneTouchAPI', ['OneTouchConfig', '$resource', function(OneTouchConfig, $resource) {
         return {
-            get: function (endpoint, callback) {
+            get: function(endpoint, callback) {
                 var resource = $resource(OneTouchConfig.baseUrl + endpoint);
                 return resource.get(callback);
             }
@@ -14,7 +14,7 @@ angular.module('OneTouch.controllers', ['ngResource'])
     }])
 
     .factory('Profile', ['OneTouchConfig', '$resource', function(OneTouchConfig, $resource) {
-        return $resource(OneTouchConfig.baseUrl + '/api/v1/user/profile.json', {'get': {method:'GET', isArray:false}});
+        return $resource(OneTouchConfig.baseUrl + '/api/v1/user/profile.json');
     }])
 
     .factory('Status', ['OneTouchAPI', function(OneTouchAPI) {
@@ -38,7 +38,7 @@ angular.module('OneTouch.controllers', ['ngResource'])
 
         return {
             getStatus: getStatus,
-            reloadStatus: reload
+            reloadStatus: reload 
         }
 
     }])
@@ -46,12 +46,17 @@ angular.module('OneTouch.controllers', ['ngResource'])
     .controller('MenuController',
     ['OneTouchAPI','Status', 'Profile', '$scope', '$state', '$stateParams',
     function (OneTouchAPI, Status, Profile, $scope, $state, $stateParams) {
-        var status  = Status.getStatus();
-        var endpoint = '/api/v1/main/menu.json';
-        if($stateParams.endpoint !== undefined)
-            endpoint = $stateParams.endpoint;
+        $scope.reloadPage = function(){
+            $scope.profile = Profile.get(); 
+            $scope.menu = OneTouchAPI.get(endpoint);
+        }
 
-        $scope.profile = Profile.get();
+        var endpoint = '/api/v1/main/menu.json';
+        if($stateParams.endpoint !== undefined){
+            endpoint = $stateParams.endpoint;
+        }
+
+        $scope.profile = Profile.get(); 
         $scope.menu = OneTouchAPI.get(endpoint);
 
         $scope.itemClicked = function(item){
@@ -66,8 +71,9 @@ angular.module('OneTouch.controllers', ['ngResource'])
     }])
 
     .controller('StatusController',
-    ['OneTouchAPI', 'Status', '$scope', function(OneTouchAPI, Status, $scope){
-            
+    ['OneTouchAPI', 'Status', '$scope', function(OneTouchAPI, Status, $scope){  
+
+
         var reloadStatus = function(){
             Status.reloadStatus(function(response){
                 $scope.status = response;
