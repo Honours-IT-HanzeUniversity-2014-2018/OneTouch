@@ -12,6 +12,7 @@ function recognizeSpeech() {
   //alert(window.plugins);
   //alert(window.plugins.speechrecognizer);
   console.log('started');
+   $('.speechText').html('U kunt beginnen met praten. <br> Druk op het laad icoontje om te stoppen');
   window.plugins.speechrecognizer.start(resultCallback, errorCallback, maxMatches, language);
 }
 

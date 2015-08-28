@@ -70,7 +70,6 @@ angular.module('OneTouch.controllers', ['ngResource'])
             };
 
             $scope.startSpeech = function(){
-                $('.speechText').html('U kunt beginnen met praten. <br> Druk op het laad icoontje om te stoppen');
                 $('.speechText').fadeIn(function(){
                     modalActivate = true;
                 });
@@ -79,16 +78,8 @@ angular.module('OneTouch.controllers', ['ngResource'])
             };
 
             $scope.doneSpeech = function(){
-                stopRecognition();
                 $scope.speaking = false;
-                if(resultSpeech){
-                    ('.speechText').html(resultSpeech);
-                } else if(errorSpeech){
-                    ('.speechText').html(errorSpeech);
-                } else {
-                    ('.speechText').html("Niet gelukt..");
-                }
-                
+                stopRecognition();
             };
             
             $scope.restartSpeech = function(){
