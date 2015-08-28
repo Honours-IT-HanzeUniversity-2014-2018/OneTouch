@@ -13,9 +13,9 @@ function recognizeSpeech() {
 }
 
 function stopRecognition(){
-  //DATA GELIJK VERZENDEN
   console.log('stopped');
   window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
+  //DATA GELIJK VERZENDEN
 }
 
 function cancelRecognition(){
