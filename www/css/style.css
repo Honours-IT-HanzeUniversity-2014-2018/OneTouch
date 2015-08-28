@@ -133,7 +133,7 @@ a.tile {
 .speechButtons {
 	position:absolute;
 	width:100%;
-	bottom:10vw;
+	bottom:0;
 	display:none;
 }
 .speechButtons button{
