@@ -76,17 +76,12 @@ angular.module('OneTouch.controllers', ['ngResource'])
                 $scope.speaking = true;
                 recognizeSpeech(); 
             };
-
-            $scope.doneSpeech = function(){
-                $scope.speaking = false;
-                stopRecognition();
-            };
             
             $scope.restartSpeech = function(){
                 if($scope.speaking == false){
                     $scope.startSpeech();
                 } else {
-                    $scope.doneSpeech();
+                    stopRecognition();
                 }
                 
                 
@@ -159,16 +154,19 @@ angular.module('OneTouch.controllers', ['ngResource'])
 
             function cancelRecognition(){
               console.log('canceled');
+              $scope.speaking = false;
               window.plugins.speechrecognizer.stop();
             }
 
             function resultCallback (result){
+              $scope.speaking = false;
               var resultSpeech = result.results[0][0].transcript;
               //alert(result.results[0][0].transcript);
               $('.speechText').html(resultSpeech);
             }
 
             function errorCallback(error){
+              $scope.speaking = false;
               var errorSpeech = "error:" + error;
               $('.speechText').html(errorSpeech);
               //alert('error, ' +error);
