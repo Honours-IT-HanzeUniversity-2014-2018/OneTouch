@@ -28,11 +28,15 @@ function cancelRecognition(){
 
 function resultCallback (result){
   resultSpeech = result.results[0][0].transcript;
-  alert(result.results[0][0].transcript);
+  //alert(result.results[0][0].transcript);
+  $('.speechText').html(resultSpeech);
+  resultSpeech = false
 }
 
 function errorCallback(error){
   errorSpeech = "error:" + error;
+  $('.speechText').html(errorSpeech);
+  errorSpeech = false
   //alert('error, ' +error);
 }
 
