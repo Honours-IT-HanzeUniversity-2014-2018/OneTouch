@@ -1,4 +1,7 @@
 
+var resultSpeech;
+var errorSpeech;
+
 function onDeviceReady(){
   console.log("Device is ready");
 }
@@ -24,12 +27,12 @@ function cancelRecognition(){
 }
 
 function resultCallback (result){
-  var resultSpeech = result.results[0][0].transcript;
+  resultSpeech = result.results[0][0].transcript;
   alert(result.results[0][0].transcript);
 }
 
 function errorCallback(error){
-  var errorSpeech = "error:" + error;
+  errorSpeech = "error:" + error;
   //alert('error, ' +error);
 }
 
