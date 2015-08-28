@@ -145,10 +145,15 @@ angular.module('OneTouch.controllers', ['ngResource'])
               window.plugins.speechrecognizer.start(resultCallback, errorCallback, maxMatches, language);
             }
 
+            function requestSpeech(speechResult){
+                return $resource("/api/v1/speech/process.json?command=",{},{
+                    query:{method:'GET',params: speechResult}
+                });
+            }
+
             function stopRecognition(){
               console.log('stopped');
               window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
-              //DATA GELIJK VERZENDEN
             }
 
             function cancelRecognition(){
@@ -159,6 +164,7 @@ angular.module('OneTouch.controllers', ['ngResource'])
 
             function resultCallback (result){
               var resultSpeech = result.results[0][0].transcript;
+              requestSpeech(resultSpeech);
               //alert(result.results[0][0].transcript);
               $('.speechText').html(resultSpeech);
               $scope.speaking = false;
