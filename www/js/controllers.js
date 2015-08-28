@@ -147,7 +147,6 @@ angular.module('OneTouch.controllers', ['ngResource'])
 
             function stopRecognition(){
               console.log('stopped');
-              $scope.speaking = false;
               window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
               //DATA GELIJK VERZENDEN
             }
@@ -159,16 +158,17 @@ angular.module('OneTouch.controllers', ['ngResource'])
             }
 
             function resultCallback (result){
-              $scope.speaking = false;
               var resultSpeech = result.results[0][0].transcript;
               //alert(result.results[0][0].transcript);
               $('.speechText').html(resultSpeech);
+              $scope.speaking = false;
             }
 
             function errorCallback(error){
-              $scope.speaking = false;
+              
               var errorSpeech = "error:" + error;
               $('.speechText').html(errorSpeech);
+              $scope.speaking = false;
               //alert('error, ' +error);
             }
 
