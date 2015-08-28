@@ -24,11 +24,13 @@ function cancelRecognition(){
 }
 
 function resultCallback (result){
+  var resultSpeech = result.results[0][0].transcript;
   alert(result.results[0][0].transcript);
 }
 
 function errorCallback(error){
-  alert('error, ' +error);
+  var errorSpeech = "error:" + error;
+  //alert('error, ' +error);
 }
 
 // Show the list of the supported languages

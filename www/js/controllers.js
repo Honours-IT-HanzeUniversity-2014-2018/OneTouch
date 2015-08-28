@@ -81,7 +81,13 @@ angular.module('OneTouch.controllers', ['ngResource'])
             $scope.doneSpeech = function(){
                 stopRecognition();
                 $scope.speaking = false;
-                //$('.speechText').html('"Ingesproken text hier"');
+                if(resultSpeech){
+                    ('.speechText').html(resultSpeech);
+                } else if(errorSpeech){
+                    ('.speechText').html(errorSpeech);
+                } else {
+                    ('.speechText').html("Niet gelukt..");
+                }
                 
             };
             
