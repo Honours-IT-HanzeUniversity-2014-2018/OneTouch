@@ -43,9 +43,19 @@ angular.module('OneTouch.controllers', ['ngResource'])
 
     }])
 
+    .factory('Speech', ['OneTouchConfig', '$resource', function(OneTouchConfig, $resource) {
+        var resource = $resource(OneTouchConfig.baseUrl + '/api/v1/speech/process.json');
+
+        resource.process = function(command, success_callback, error_callback) {
+            resource.get({'command': command}).$promise.then(success_callback, error_callback);
+        };
+
+        return resource;
+    }])
+
     .controller('MenuController',
-        ['OneTouchAPI','Status', 'Profile', '$scope', '$state', '$stateParams',
-        function (OneTouchAPI, Status, Profile, $scope, $state, $stateParams) {
+        ['OneTouchAPI', 'Speech', 'Status', 'Profile', '$scope', '$state', '$stateParams',
+        function (OneTouchAPI, Speech, Status, Profile, $scope, $state, $stateParams) {
             var modalActivate = false;
             var speaking = false;
             $scope.speaking = false;
@@ -57,6 +67,7 @@ angular.module('OneTouch.controllers', ['ngResource'])
                     $scope.startSpeech();
                 }
             };
+
             $scope.cancelAndCloseSpeech = function(){
                 if(modalActivate == true){
                     $('.speechText').fadeOut();
@@ -83,24 +94,12 @@ angular.module('OneTouch.controllers', ['ngResource'])
                 } else {
                     stopRecognition();
                 }
-                
-                
             };
 
             $scope.reloadPage = function(){
                 $scope.profile = Profile.get();
                 $scope.menu = OneTouchAPI.get(endpoint);
             };
-
-            $scope.status = Status.getStatus();
-            var endpoint = '/api/v1/main/menu.json';
-
-            if($stateParams.endpoint !== undefined){
-                endpoint = $stateParams.endpoint;
-            }
-
-            $scope.profile = Profile.get();
-            $scope.menu = OneTouchAPI.get(endpoint);
 
             $scope.itemClicked = function(item){
                 if(item.action == null || item.loading || item.show_check) return;
@@ -125,79 +124,79 @@ angular.module('OneTouch.controllers', ['ngResource'])
                         item.loading = false;
                     }
                 );
-            }
-
+            };
 
             /* ------------------------------------------- */
             /* ----------------SPEECH -------------------- */
             /* ------------------------------------------- */
-            function onDeviceReady(){
-              console.log("Device is ready");
-            }
 
             function recognizeSpeech() {
-              var maxMatches = 5;
-              var language = "nl-NL";
-              //alert(window.plugins);
-              //alert(window.plugins.speechrecognizer);
-              console.log('started');
-               $('.speechText').html('U kunt beginnen met praten. <br> Druk op het laad icoontje om te stoppen');
-              window.plugins.speechrecognizer.start(resultCallback, errorCallback, maxMatches, language);
+                var maxMatches = 5;
+                var language = "nl-NL";
+                $('.speechText').html('U kunt beginnen met praten.');
+                window.plugins.speechrecognizer.start(resultCallback, errorCallback, maxMatches, language);
             }
 
-            function requestSpeech(speechResult){
-                return $resource("/api/v1/speech/process.json?command=",{},{
-                    query:{method:'GET',params: speechResult}
+            function stopRecognition() {
+                window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
+            }
+
+            function cancelRecognition() {
+                $scope.speaking = false;
+                window.plugins.speechrecognizer.stop();
+            }
+
+            function resultCallback(result) {
+                var resultSpeech = result.results[0][0].transcript;
+                $('.speechText').html(resultSpeech);
+
+                $scope.speaking = false;
+                $scope.loading_speech = true;
+
+                $('.speechButtons').fadeOut();
+
+                var speech_error = function() {
+                    $scope.loading_speech = false;
+
+                    $('.mic-field').addClass('error');
+                    setTimeout(function() {
+                        $('.mic-field').removeClass('error');
+                        $scope.cancelAndCloseSpeech();
+                    }, 2000);
+                };
+
+                Speech.process(resultSpeech, function(response) {
+                    $scope.loading_speech = false;
+
+                    if(response.success) {
+                        $('.mic-field').addClass('check');
+                        setTimeout(function () {
+                            $('.mic-field').removeClass('check');
+                            $scope.cancelAndCloseSpeech();
+                        }, 2000);
+                    }
+                    else {
+                        speech_error();
+                    }
+                }, function(error) {
+                    speech_error();
                 });
             }
 
-            function stopRecognition(){
-              console.log('stopped');
-              window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
+            function errorCallback(error) {
+                $('.speechText').html("De spraak werd niet herkent.");
+                $scope.speaking = false;
             }
 
-            function cancelRecognition(){
-              console.log('canceled');
-              $scope.speaking = false;
-              window.plugins.speechrecognizer.stop();
+            $scope.status = Status.getStatus();
+            var endpoint = '/api/v1/main/menu.json';
+
+            if($stateParams.endpoint !== undefined){
+                endpoint = $stateParams.endpoint;
             }
 
-            function resultCallback (result){
-              var resultSpeech = result.results[0][0].transcript;
-              requestSpeech(resultSpeech);
-              //alert(result.results[0][0].transcript);
-              $('.speechText').html(resultSpeech);
-              $scope.speaking = false;
-            }
-
-            function errorCallback(error){
-              
-              var errorSpeech = "error:" + error;
-              $('.speechText').html(errorSpeech);
-              $scope.speaking = false;
-              //alert('error, ' +error);
-            }
-
-            // Show the list of the supported languages
-            function getSupportedLanguages() {
-              window.plugins.speechrecognizer.getSupportedLanguages(function(languages){
-                // display the json array
-                alert(languages);
-              }, function(error){
-                alert("Could not retrieve the supported languages : " + error);
-              });
-            }
-
-            document.addEventListener("deviceready", onDeviceReady, true);
-
-            
-
-
-
-
-
-
-            
+            $scope.profile = Profile.get();
+            $scope.menu = OneTouchAPI.get(endpoint);
         }
     ])
 

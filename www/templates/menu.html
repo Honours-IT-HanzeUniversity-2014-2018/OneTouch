@@ -55,13 +55,20 @@
                     </div>
                 </a>
             </span>
+
+
             <!-- STATUS.SUCCESS HIDE?????? moet gelijk met status icon -->
             <!-- Microphone field--> 
             <div class="mic-field" ng-if="menu.show_profile" ng-click="openAndStartSpeech()">
+                <i class="ion-checkmark-round check-icon speak_icon"></i>
+                <i class="ion-close-round error-icon speak_icon"></i>
                 <i class="ion-mic-a" ng-class="{true: 'mic-on', false: 'mic-off'}[speaking == true]"></i>
+
                 <div class="speechText"></div>
 
-                <ion-spinner class='speakingSpinner' icon='spiral' ng-show="speaking" ng-click="doneSpeech()"></ion-spinner>
+                <ion-spinner class='speakingSpinner' icon='ripple' ng-show="speaking" ng-click="doneSpeech()"></ion-spinner>
+
+                <ion-spinner class='speakingSpinner' icon='spiral' ng-show='loading_speech'></ion-spinner>
 
                 <div class="speechButtons">
                     <button class="resetBtn" ng-show="speaking" ng-click="restartSpeech()">Stop</button>
