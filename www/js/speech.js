@@ -24,7 +24,7 @@ function cancelRecognition(){
 }
 
 function resultCallback (result){
-  alert(result.results[0][0].transcript;);
+  alert(result.results[0][0].transcript);
 }
 
 function errorCallback(error){
