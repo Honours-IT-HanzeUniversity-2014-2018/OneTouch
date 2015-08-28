@@ -24,9 +24,8 @@ function cancelRecognition(){
 }
 
 function resultCallback (result){
-  $('.speechText').html('"'+ resultCallback() + '+');
-  return result.results[0][0].transcript;
-  }
+  alert(result.results[0][0].transcript;);
+}
 
 function errorCallback(error){
   alert('error, ' +error);
