@@ -28,6 +28,7 @@ function cancelRecognition(){
 }
 
 function resultCallback (result){
+  $scope.speaking = false;
   resultSpeech = result.results[0][0].transcript;
   //alert(result.results[0][0].transcript);
   $('.speechText').html(resultSpeech);
@@ -35,6 +36,7 @@ function resultCallback (result){
 }
 
 function errorCallback(error){
+  $scope.speaking = false;
   errorSpeech = "error:" + error;
   $('.speechText').html(errorSpeech);
   errorSpeech = false
