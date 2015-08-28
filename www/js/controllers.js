@@ -92,13 +92,6 @@ angular.module('OneTouch.controllers', ['ngResource'])
                 
             };
 
-            
-
-
-
-
-
-
             $scope.reloadPage = function(){
                 $scope.profile = Profile.get();
                 $scope.menu = OneTouchAPI.get(endpoint);
@@ -138,6 +131,69 @@ angular.module('OneTouch.controllers', ['ngResource'])
                     }
                 );
             }
+
+
+            /* ------------------------------------------- */
+            /* ----------------SPEECH -------------------- */
+            /* ------------------------------------------- */
+            function onDeviceReady(){
+              console.log("Device is ready");
+            }
+
+            function recognizeSpeech() {
+              var maxMatches = 5;
+              var language = "nl-NL";
+              //alert(window.plugins);
+              //alert(window.plugins.speechrecognizer);
+              console.log('started');
+               $('.speechText').html('U kunt beginnen met praten. <br> Druk op het laad icoontje om te stoppen');
+              window.plugins.speechrecognizer.start(resultCallback, errorCallback, maxMatches, language);
+            }
+
+            function stopRecognition(){
+              console.log('stopped');
+              $scope.speaking = false;
+              window.plugins.speechrecognizer.stop(resultCallback, errorCallback);
+              //DATA GELIJK VERZENDEN
+            }
+
+            function cancelRecognition(){
+              console.log('canceled');
+              window.plugins.speechrecognizer.stop();
+            }
+
+            function resultCallback (result){
+              var resultSpeech = result.results[0][0].transcript;
+              //alert(result.results[0][0].transcript);
+              $('.speechText').html(resultSpeech);
+            }
+
+            function errorCallback(error){
+              var errorSpeech = "error:" + error;
+              $('.speechText').html(errorSpeech);
+              //alert('error, ' +error);
+            }
+
+            // Show the list of the supported languages
+            function getSupportedLanguages() {
+              window.plugins.speechrecognizer.getSupportedLanguages(function(languages){
+                // display the json array
+                alert(languages);
+              }, function(error){
+                alert("Could not retrieve the supported languages : " + error);
+              });
+            }
+
+            document.addEventListener("deviceready", onDeviceReady, true);
+
+            
+
+
+
+
+
+
+            
         }
     ])
 
